@@ -65,6 +65,12 @@ Feature: Configuring the theme_boost_union plugin for the "Mobile" tab on the "L
 
   @javascript @_file_upload
   Scenario: Setting: Touch icon files for iOS - Upload touch icon files
+    Given I log in as "admin"
+    And I navigate to "Appearance > Themes > Theme selector" in site administration
+    And I click on "Change theme" "link" in the "Default theme" "table_row"
+    And I click on "Boost Union" "link"
+    And I press "Use theme"
+    And I log out
     When I log in as "admin"
     And Behat debugging is disabled
     And I navigate to "Appearance > Boost Union > Look" in site administration

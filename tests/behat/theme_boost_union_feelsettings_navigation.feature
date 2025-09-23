@@ -120,7 +120,13 @@ Feature: Configuring the theme_boost_union plugin for the "Navigation" tab on th
 
   @javascript
   Scenario Outline: Setting: Show starred courses popover in the navbar.
-    Given the following config values are set as admin:
+    Given I log in as "admin"
+    And I navigate to "Appearance > Themes > Theme selector" in site administration
+    And I click on "Change theme" "link" in the "Default theme" "table_row"
+    And I click on "<activethemelabel>" "link"
+    And I press "Use theme"
+    And I log out
+    And the following config values are set as admin:
       | config                   | value     | plugin            |
       | shownavbarstarredcourses | <setting> | theme_boost_union |
     And the theme cache is purged and the theme is reloaded
@@ -132,13 +138,21 @@ Feature: Configuring the theme_boost_union plugin for the "Navigation" tab on th
     Then "nav.navbar #usernavigation .popover-region-favourites" "css_element" <shouldornot> be visible
 
     Examples:
-      | setting | shouldornot |
-      | yes     | should      |
-      | no      | should not  |
+      | setting | activethemelabel | shouldornot |
+      | yes     | Boost Union      | should      |
+      | yes     | Classic          | should not  |
+      | no      | Boost Union      | should not  |
+      | no      | Classic          | should not  |
 
   @javascript
   Scenario: Setting: Show starred courses popover in the navbar (and make sure that I see the right courses there).
-    Given the following config values are set as admin:
+    Given I log in as "admin"
+    And I navigate to "Appearance > Themes > Theme selector" in site administration
+    And I click on "Change theme" "link" in the "Default theme" "table_row"
+    And I click on "Boost Union" "link"
+    And I press "Use theme"
+    And I log out
+    And the following config values are set as admin:
       | config                   | value | plugin            |
       | shownavbarstarredcourses | yes   | theme_boost_union |
     And the following "courses" exist:
@@ -174,7 +188,13 @@ Feature: Configuring the theme_boost_union plugin for the "Navigation" tab on th
 
   @javascript
   Scenario Outline: Setting: Starred courses popover cog icon link target
-    Given the following config values are set as admin:
+    Given I log in as "admin"
+    And I navigate to "Appearance > Themes > Theme selector" in site administration
+    And I click on "Change theme" "link" in the "Default theme" "table_row"
+    And I click on "Boost Union" "link"
+    And I press "Use theme"
+    And I log out
+    And the following config values are set as admin:
       | config                   | value     | plugin            |
       | shownavbarstarredcourses | yes       | theme_boost_union |
       | starredcourseslinktarget | <setting> | theme_boost_union |
